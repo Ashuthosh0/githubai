@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/PVGAR/Documents/githubAI/githubai/src/app/dashboard/page.tsx"],"sourcesContent":["'use client'\r\nimport { useUser } from '@clerk/nextjs'\r\nimport React from 'react'\r\n\r\n\r\nconst DashboardPage = () => {\r\n  const {user} =  useUser()\r\n  return (\r\n    <div>\r\n      {user?.firstName}\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default DashboardPage"],"names":[],"mappings":";;;;AACA;AADA;;;AAKA,MAAM,gBAAgB;IACpB,MAAM,EAAC,IAAI,EAAC,GAAI,CAAA,GAAA,4JAAA,CAAA,UAAO,AAAD;IACtB,qBACE,8OAAC;kBACE,MAAM;;;;;;AAGb;uCAEe","debugId":null}}]
+}

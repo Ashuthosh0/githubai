@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 19, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/PVGAR/Documents/githubAI/githubai/src/app/%28protected%29/qa/page.tsx"],"sourcesContent":["import React from 'react'\r\n\r\nconst QApage = () => {\r\n  return (\r\n    <div>QApage</div>\r\n  )\r\n}\r\n \r\nexport default QApage"],"names":[],"mappings":";;;;;AAEA,MAAM,SAAS;IACb,qBACE,8OAAC;kBAAI;;;;;;AAET;uCAEe","debugId":null}}]
+}
