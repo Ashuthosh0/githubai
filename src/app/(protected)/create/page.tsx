@@ -7,16 +7,13 @@ import type { AppRouter } from '@/server/api/root'
 import { api } from '@/trpc/react'
 import type { inferRouterOutputs } from '@trpc/server'
 import { Info } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { Router } from 'next/router'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 type CheckCreditsOutput = inferRouterOutputs<AppRouter>['project']['check_Credits'];
-
-
-
-
-
 
 type FormInput = {
   repoUrl: string
@@ -25,6 +22,7 @@ type FormInput = {
 }
 
 const CreatePage = () => {
+  const router = useRouter()
   const { register, handleSubmit, reset } = useForm<FormInput>()
   const createProject = api.project.createProject.useMutation()
   const checkCredits = api.project.check_Credits.useMutation()
@@ -35,8 +33,8 @@ const CreatePage = () => {
   const refetch = UseRefetch();
 
   function onSubmit(data: FormInput) {
-    window.alert(JSON.stringify(data,null,2))
-    createProject.mutate({
+    if(!!checkCredits.data){
+      createProject.mutate({
       githubUrl : data.repoUrl,
       name : data.projectName,
       githubToken : data.githubToken
@@ -46,13 +44,21 @@ const CreatePage = () => {
       toast.success('Project created successfully')
       refetch();
       reset()
+      router.push('/dashboard');
     },
     onError : () => {
       toast.error('Failed to create project')
     }
   })
-    return true
+    } else {
+      checkCredits.mutate({
+        githubUrl : data.repoUrl,
+        githubToken : data.githubToken
+      })
+    }
   }
+
+  const hasEnoughCredits = checkCredits?.data?.userCredits ? checkCredits.data.userCredits >= checkCredits.data.fileCount : true;
 
   return (
     <div className="flex flex-col items-center justify-center h-full gap-6 px-4">
@@ -98,10 +104,11 @@ const CreatePage = () => {
           </>
         )}
         <div className ="h-4"></div>
-        <Button type="submit" disabled={createProject.isPending}>
-          create project
+        <Button type="submit" disabled={createProject.isPending || checkCredits.isPending || !hasEnoughCredits}>
+          {!!checkCredits.data ? 'Create Project ' : 'Check Credits'}
         </Button>
       </form>
+
     </div>
   )
 }
