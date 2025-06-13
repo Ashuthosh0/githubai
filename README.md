@@ -8,16 +8,18 @@ Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (RAG) to do 
 ## Tech Stack  
 
 ### Frontend & UI  
-- Next.js App Router — for file-based routing and layouts  
-- TailwindCSS — utility-first styling  
+- Next.js App Router — for routing and layouts  
+- TailwindCSS — for styling  
 - shadCN — polished, accessible UI components  
 
 ### Backend & APIs  
 - Prisma ORM + NeonDB — handles user data and interaction records  
-- Clerk — authentication layer (email/password, social logins)  
-- GitHub API — fetches repo content and file structure  
-- AssemblyAI — transcribes audio + extracts meeting highlights  
-- Gemini API — does smart Q&A with basic RAG implementation  
+- Clerk — authentication layer (email/password, social logins) 
+- tRPC — typesafe API layer between UI and backend  
+- GitHub API — fetches repo content and file structure
+   (also designed an algorithm to fetch the file count of that repo)
+- AssemblyAI — transcribes audio + extracts meeting highlights with timestamps 
+- Gemini API — does Q&A with basic RAG implementation  
 
 ---
 
@@ -30,9 +32,9 @@ Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (RAG) to do 
    → GitHub API fetches the repo’s file tree + raw content.
 
 3. Q&A Page  
-   → The app chunks files (if needed), runs retrieval (RAG), sends prompt to Gemini API, and returns smart answers.
+   → The app chunks files (if needed), runs retrieval (RAG), sends prompt to gemini API, and responds with answers.
 
-4. Optional: Upload a meeting audio file  
+4. Upload a meeting audio file(meetings page)  
    → Audio is processed via AssemblyAI, highlights are pulled out and shown.
 
 5. All data is saved per user  
