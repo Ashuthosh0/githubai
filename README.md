@@ -1,18 +1,18 @@
-# GitHubAI 🧠📁  
-GitHubAI is your personal repo Q&A and meeting notes extractor — built to make GitHub content and audio recordings instantly understandable. Whether you're revisiting a long issue thread or skimming through a call recording, GitHubAI helps you extract context, generate summaries, and get straight to the point.
+# GitHubAI 
+GitHubAI is your personal repo Q&A and meeting notes extractor, built to make GitHub content and audio recordings instantly understandable. Whether you're revisiting a long issue thread or skimming through a call recording, GitHubAI helps you extract context, generate summaries, and get straight to the point.
 
-Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (in RAG mode) to do the heavy lifting.  
+Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (RAG) to do the heavy lifting.  
 
 ---
 
-## ⚙️ Tech Stack  
+## Tech Stack  
 
-### 🧩 Frontend & UI  
+### Frontend & UI  
 - Next.js App Router — for file-based routing and layouts  
 - TailwindCSS — utility-first styling  
 - shadCN — polished, accessible UI components  
 
-### 🛠 Backend & APIs  
+### Backend & APIs  
 - Prisma ORM + NeonDB — handles user data and interaction records  
 - Clerk — authentication layer (email/password, social logins)  
 - GitHub API — fetches repo content and file structure  
@@ -21,15 +21,15 @@ Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (in RAG mode
 
 ---
 
-## 🧩 What Happens After Login  
+## What You'll see after logging in: 
 
-1. User logs in with Clerk  
+1. After Clerk login 
    → Auth session is created, tracked in NeonDB using Prisma.
 
-2. They link a GitHub repo  
-   → GitHub API fetches the repo’s file tree + raw content for processing.
+2. Create Page  
+   → GitHub API fetches the repo’s file tree + raw content.
 
-3. They ask repo-specific questions  
+3. Q&A Page  
    → The app chunks files (if needed), runs retrieval (RAG), sends prompt to Gemini API, and returns smart answers.
 
 4. Optional: Upload a meeting audio file  
@@ -40,7 +40,7 @@ Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (in RAG mode
 
 ---
 
-## 🚀 Setup Instructions  
+## How to Set up 
 
 ### 1. Clone the Repo  
 ```bash
@@ -79,6 +79,8 @@ npx prisma db push
 ```bash
 npm run dev
 ```
+
+im planning to integrate razorpay payment gateway, with a separate Billing page where users must buy credits to create a project and use other features
 
 
 
