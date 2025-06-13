@@ -1,54 +1,55 @@
-# GitHubAI 
-GitHubAI is your personal repo Q&A and meeting notes extractor, built to make GitHub content and audio recordings instantly understandable. Whether you're revisiting a long issue thread or skimming through a call recording, GitHubAI helps you extract context, generate summaries, and get straight to the point.
+# GitHubAI
 
-Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (RAG) to do the heavy lifting.  
+GitHubAI is a repo Q&A and meeting highlight platform designed to help you quickly understand large GitHub projects and extract key points from recorded meetings. Whether you’re exploring unfamiliar codebases or reviewing discussion calls, GitHubAI makes the process faster and more manageable.
 
----
-
-## Tech Stack  
-
-### Frontend & UI  
-- Next.js App Router — for routing and layouts  
-- TailwindCSS — for styling  
-- shadCN — polished, accessible UI components  
-
-### Backend & APIs  
-- Prisma ORM + NeonDB — handles user data and interaction records  
-- Clerk — authentication layer (email/password, social logins) 
-- tRPC — typesafe API layer between UI and backend  
-- GitHub API — fetches repo content and file structure
-   (also designed an algorithm to fetch the file count of that repo)
-- AssemblyAI — transcribes audio + extracts meeting highlights with timestamps 
-- Gemini API — does Q&A with basic RAG implementation  
+It brings together GitHub API, AssemblyAI, and Gemini Pro (via basic RAG) to do the heavy lifting behind the scenes.
 
 ---
 
-## What You'll see after logging in: 
+## Tech Stack
 
-1. After Clerk login 
-   → Auth session is created, tracked in NeonDB using Prisma.
+### Frontend & UI
+- Next.js App Router — for structured routing and layouts  
+- TailwindCSS — utility-first styling  
+- shadCN — accessible and clean component library
+
+### Backend & APIs
+- Prisma ORM + NeonDB — manages all user data and project state  
+- Clerk — handles authentication (email, social logins)  
+- tRPC — enables typesafe API communication between frontend and backend  
+- GitHub API — pulls file trees and raw repo content  
+  (includes a small algorithm to count all files in a repo)  
+- AssemblyAI — transcribes audio files and extracts timestamped highlights  
+- Gemini API — performs contextual Q&A using a basic Retrieval-Augmented Generation setup
+
+---
+
+## What You’ll See After Logging In
+
+1. Login via Clerk  
+   → The user session is created and saved using Prisma + NeonDB.
 
 2. Create Page  
-   → GitHub API fetches the repo’s file tree + raw content.
+   → GitHub API fetches the structure and contents of the selected repo.
 
 3. Q&A Page  
-   → The app chunks files (if needed), runs retrieval (RAG), sends prompt to gemini API, and responds with answers.
+   → You can ask questions about the repo; the system chunks the content, retrieves relevant parts, and Gemini generates the answer.
 
-4. Upload a meeting audio file(meetings page)  
-   → Audio is processed via AssemblyAI, highlights are pulled out and shown.
+4. Meetings Page  
+   → Upload audio recordings of meetings; AssemblyAI transcribes and extracts the main highlights with timestamps.
 
-5. All data is saved per user  
-   → Interactions, repo metadata, and audio notes are stored for later access.
+5. Everything is stored per user  
+   → Project data, questions, answers, and meeting summaries are saved for reuse.
 
 ---
 
-## How to Set up 
+## How to Set It Up
 
-### 1. Clone the Repo  
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/your-username/githubAI.git
 cd githubAI
-```
+
 
 ### 2. Install Dependencies  
 ```bash
