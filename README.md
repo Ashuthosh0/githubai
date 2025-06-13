@@ -40,6 +40,7 @@ It brings together GitHub API, AssemblyAI, and Gemini Pro (via basic RAG) to do 
 
 5. Everything is stored per user  
    → Project data, questions, answers, and meeting summaries are saved for reuse.
+You can even invite your friends into a project by clicking on the invite button
 
 ---
 
