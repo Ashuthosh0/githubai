@@ -4,7 +4,13 @@ GitHubAI is a repo Q&A and meeting highlight platform designed to help you quick
 
 It brings together GitHub API, AssemblyAI, and Gemini Pro (via basic RAG) to do the heavy lifting behind the scenes.
 
----
+### Homepage
+This is the landing experience users see after they login GitHubAI:
+![Homepage](./public/homepage.png)
+
+### Dashboard
+![Dashboard](./public/dashboard.png)
+
 
 ## Tech Stack
 
