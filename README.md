@@ -83,8 +83,7 @@ npx prisma db push
 npm run dev
 ```
 
-im planning to integrate razorpay payment gateway, with a separate Billing page where users must buy credits to create a project and use other features
-
+I’m currently working on Razorpay integration. Users will be able to buy credits via a dedicated Billing page. These credits will be required to create new projects and unlock advanced features.
 
 
 
