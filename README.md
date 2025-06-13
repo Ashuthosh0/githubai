@@ -46,3 +46,8 @@ Under the hood, it taps into GitHub API, AssemblyAI, and Gemini Pro (in RAG mode
 ```bash
 git clone https://github.com/your-username/githubAI.git
 cd githubAI
+
+### 2. Install Dependencies  
+```bash
+npm install
+
