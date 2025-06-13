@@ -52,4 +52,14 @@ cd githubAI
 ```bash
 npm install
 ```
+### 3. Create a .env.local File
+Create a .env.local file in the root directory and add your config keys:
+```bash
+DATABASE_URL=your_neondb_url
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret
+GITHUB_TOKEN=your_github_token
+GEMINI_API_KEY=your_gemini_api_key
+ASSEMBLYAI_API_KEY=your_assemblyai_key
+```
 
