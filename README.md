@@ -55,11 +55,31 @@ npm install
 ### 3. Create a .env.local File
 Create a .env.local file in the root directory and add your config keys:
 ```bash
-DATABASE_URL=your_neondb_url
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
-CLERK_SECRET_KEY=your_clerk_secret
-GITHUB_TOKEN=your_github_token
-GEMINI_API_KEY=your_gemini_api_key
-ASSEMBLYAI_API_KEY=your_assemblyai_key
+DATABASE_URL=""
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_FORCE_REDIRECT_URL = "/sync-user"
+GITHUB_TOKEN =''
+GEMINI_API=''
+ASSEMBLYAI_API_KEY = ""
+NEXT_PUBLIC_APP_URL='http://localhost:3000'
 ```
+
+### 4. Setup Database
+Everytime you add a model into the prisma or modify it run:
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+### 5. Start the App
+```bash
+npm run dev
+```
+
+
+
 
