@@ -8,6 +8,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import UseProject from "@/hooks/use-project"
+import Image from 'next/image'
 const items =[
   {
     title : 'Dashboard',
@@ -25,12 +26,8 @@ const items =[
     title : 'Meetings',
     url : "/meetings",
     icon : Presentation
-  },
-  {
-    title : 'Billing',
-    url : "/billing",
-    icon : CreditCard
   }
+  
 ]
 
 
@@ -40,7 +37,20 @@ export function AppSidebar(){
   return(
     <Sidebar collapsible ="icon" variant = "floating">
       <SidebarHeader>
-        Logo
+         <Link
+      href="/dashboard"
+      className="flex items-center gap-2 px-4 py-3"
+    >
+      <Image
+        src="/logo2.png"
+        alt="GitHubAI Logo"
+        width={38}
+        height={38}
+        className="rounded-sm"
+      />
+      <span className="text-xl font-semibold text-gray-900">GitHubAI</span>
+    </Link>
+
 
 
       </SidebarHeader>
