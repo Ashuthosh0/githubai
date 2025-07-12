@@ -82,6 +82,8 @@
   :root, :host {
     --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --color-red-500: oklch(63.7% .237 25.331);
+    --color-red-600: oklch(57.7% .245 27.325);
     --color-yellow-500: oklch(79.5% .184 86.047);
     --color-green-300: oklch(87.1% .15 154.449);
     --color-blue-50: oklch(97% .014 254.604);
@@ -109,10 +111,12 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: .25rem;
+    --breakpoint-xl: 80rem;
     --container-sm: 24rem;
     --container-md: 28rem;
     --container-lg: 32rem;
     --container-2xl: 42rem;
+    --container-3xl: 48rem;
     --text-xs: .75rem;
     --text-xs--line-height: calc(1 / .75);
     --text-sm: .875rem;
@@ -873,6 +877,10 @@
     height: calc(var(--spacing) * 12);
   }
 
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
@@ -1017,6 +1025,10 @@
     width: calc(var(--spacing) * 10);
   }
 
+  .w-16 {
+    width: calc(var(--spacing) * 16);
+  }
+
   .w-40 {
     width: calc(var(--spacing) * 40);
   }
@@ -1069,6 +1081,10 @@
     max-width: var(--container-2xl);
   }
 
+  .max-w-3xl {
+    max-width: var(--container-3xl);
+  }
+
   .max-w-\[70vw\] {
     max-width: 70vw;
   }
@@ -1087,6 +1103,10 @@
 
   .max-w-md {
     max-width: var(--container-md);
+  }
+
+  .max-w-screen-xl {
+    max-width: var(--breakpoint-xl);
   }
 
   .min-w-0 {
@@ -1957,6 +1977,10 @@
     padding-top: calc(var(--spacing) * 4);
   }
 
+  .pt-6 {
+    padding-top: calc(var(--spacing) * 6);
+  }
+
   .pr-2 {
     padding-right: calc(var(--spacing) * 2);
   }
@@ -2184,6 +2208,14 @@
 
   .text-primary-foreground {
     color: var(--primary-foreground);
+  }
+
+  .text-red-500 {
+    color: var(--color-red-500);
+  }
+
+  .text-red-600 {
+    color: var(--color-red-600);
   }
 
   .text-secondary-foreground {
@@ -2948,6 +2980,12 @@
   @media (hover: hover) {
     .hover\:underline:hover {
       text-decoration-line: underline;
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:opacity-90:hover {
+      opacity: .9;
     }
   }
 

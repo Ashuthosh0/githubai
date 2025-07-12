@@ -169,75 +169,67 @@ const CreatePage = ()=>{
                                             className: "size-4"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(protected)/create/page.tsx",
-                                            lineNumber: 94,
-                                            columnNumber: 15
+                                            lineNumber: 114,
+                                            columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                             className: "text-sm",
                                             children: [
-                                                "You will be charged ",
+                                                "There are ",
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
                                                     children: [
                                                         fileCount,
-                                                        " credit for this repository"
+                                                        " file",
+                                                        fileCount !== 1 ? 's' : '',
+                                                        " in this repository"
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/(protected)/create/page.tsx",
-                                                    lineNumber: 96,
-                                                    columnNumber: 37
+                                                    lineNumber: 116,
+                                                    columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(protected)/create/page.tsx",
-                                            lineNumber: 95,
-                                            columnNumber: 15
+                                            lineNumber: 115,
+                                            columnNumber: 9
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(protected)/create/page.tsx",
-                                    lineNumber: 93,
-                                    columnNumber: 13
+                                    lineNumber: 113,
+                                    columnNumber: 7
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-sm text-blue-600 ml-6",
-                                    children: [
-                                        "You have ",
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                            children: userCredits
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/(protected)/create/page.tsx",
-                                            lineNumber: 100,
-                                            columnNumber: 24
-                                        }, this),
-                                        " credits remaining."
-                                    ]
-                                }, void 0, true, {
+                                fileCount > 60 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm text-red-500 ml-6 mt-1",
+                                    children: "Too many files, the limit is 60. Please reduce your repo size."
+                                }, void 0, false, {
                                     fileName: "[project]/src/app/(protected)/create/page.tsx",
-                                    lineNumber: 99,
-                                    columnNumber: 13
+                                    lineNumber: 120,
+                                    columnNumber: 9
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(protected)/create/page.tsx",
-                            lineNumber: 92,
-                            columnNumber: 11
+                            lineNumber: 112,
+                            columnNumber: 5
                         }, this)
                     }, void 0, false),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "h-4"
                     }, void 0, false, {
                         fileName: "[project]/src/app/(protected)/create/page.tsx",
-                        lineNumber: 106,
-                        columnNumber: 9
+                        lineNumber: 128,
+                        columnNumber: 1
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
                         type: "submit",
-                        disabled: createProject.isPending || checkCredits.isPending || !hasEnoughCredits,
-                        children: !!checkCredits.data ? 'Create Project ' : 'Check Credits'
+                        disabled: createProject.isPending || checkCredits.isPending || !hasEnoughCredits || !!fileCount && fileCount > 60,
+                        children: !!checkCredits.data ? 'Create Project' : 'Check Files'
                     }, void 0, false, {
                         fileName: "[project]/src/app/(protected)/create/page.tsx",
-                        lineNumber: 107,
-                        columnNumber: 9
+                        lineNumber: 130,
+                        columnNumber: 1
                     }, this)
                 ]
             }, void 0, true, {

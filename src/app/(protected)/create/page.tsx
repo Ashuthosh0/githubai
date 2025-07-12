@@ -87,13 +87,13 @@ const CreatePage = () => {
           {...register('githubToken')}
           placeholder="GitHub Token (Optional)"
         />
-        {!!checkCredits.data &&(
+        {/* {!!checkCredits.data &&(
           <>
           <div className="mt-4 bg-blue-50 px-4 py-2 rounded-md border border-blue-200 text-blue-700">
             <div className="flex items-center gap-2">
               <Info className="size-4" />
               <p className="text-sm">
-                You will be charged <strong>{fileCount} credit for this repository</strong>
+                There are <strong>{fileCount}s files in this repository</strong>
               </p>
             </div>
             <p className="text-sm text-blue-600 ml-6">
@@ -106,7 +106,39 @@ const CreatePage = () => {
         <div className ="h-4"></div>
         <Button type="submit" disabled={createProject.isPending || checkCredits.isPending || !hasEnoughCredits}>
           {!!checkCredits.data ? 'Create Project ' : 'Check Credits'}
-        </Button>
+        </Button> */}
+        {!!checkCredits.data && (
+  <>
+    <div className="mt-4 bg-blue-50 px-4 py-2 rounded-md border border-blue-200 text-blue-700">
+      <div className="flex items-center gap-2">
+        <Info className="size-4" />
+        <p className="text-sm">
+          There are <strong>{fileCount} file{fileCount !== 1 ? 's' : ''} in this repository</strong>
+        </p>
+      </div>
+      {fileCount! > 60 && (
+        <p className="text-sm text-red-500 ml-6 mt-1">
+          Too many files, the limit is 60. Please reduce your repo size.
+        </p>
+      )}
+    </div>
+  </>
+)}
+
+<div className="h-4"></div>
+
+<Button
+  type="submit"
+  disabled={
+    createProject.isPending ||
+    checkCredits.isPending ||
+    !hasEnoughCredits ||
+    (!!fileCount && fileCount > 60)
+  }
+>
+  {!!checkCredits.data ? 'Create Project' : 'Check Files'}
+</Button>
+
       </form>
 
     </div>
@@ -114,3 +146,4 @@ const CreatePage = () => {
 }
 
 export default CreatePage
+
