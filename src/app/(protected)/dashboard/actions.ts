@@ -44,10 +44,10 @@ export async function askQuestion(question: string, projectId: string) {
   console.log(`[askQuestion] Constructed context block. Total length: ${context.length}`)
 
   ;(async () => {
-    console.log(`[askQuestion] Starting Gemini streamText call...`)
-    const { textStream } = await streamText({
-      model: google('gemini-1.5-flash'),
-      prompt: `
+    try {
+      const { textStream } = await streamText({
+        model: google('gemini-3.6-flash'),
+        prompt: `
 You are an AI code assistant who answers questions about the codebase. Your target audience is a technical intern.
 AI assistant is a brand new, powerful, human-like artificial intelligence.
 The traits of AI include expert knowledge, helpfulness, cleverness, and articulateness.
@@ -67,17 +67,17 @@ AI assistant will not apologize for previous responses, but instead will indicat
 AI assistant will not invent anything that is not drawn directly from the context.
 Answer in markdown syntax, with code snippets if needed. Be as detailed as possible when answering technical questions.
       `,
-    })
+      })
 
-    console.log(`[askQuestion] Gemini stream started.`)
-    let chunkCount = 0
-    for await (const delta of textStream) {
-      chunkCount++
-      console.log(`[askQuestion] Delta chunk [${chunkCount}]:`, delta)
-      stream.update(delta)
+      for await (const delta of textStream) {
+        if (delta) stream.update(delta)
+      }
+    } catch (err) {
+      console.error('[askQuestion] streamText error:', err)
+      stream.update('Sorry, an error occurred while generating the answer.')
+    } finally {
+      stream.done()
     }
-    stream.done()
-    console.log(`[askQuestion] Streaming completed. Total chunks received: ${chunkCount}`)
   })()
 
   console.log(`[askQuestion] Returning stream and file references to caller.`)

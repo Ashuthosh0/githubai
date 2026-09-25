@@ -11,7 +11,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "../db";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 
 /**
  * 1. CONTEXT
@@ -81,21 +81,63 @@ export const createTRPCRouter = t.router;
  * network latency that would occur in production but not in local development.
  */
 
-const isAuthenticated = t.middleware(async ({ next , ctx}) =>{
+const isAuthenticated = t.middleware(async ({ next, ctx }) => {
   const user = await auth();
-  if(!user){
+  if (!user || !user.userId) {
     throw new TRPCError({
-      code : 'UNAUTHORIZED',
-      message : "You must be logged in to access this response"
-    })
+      code: "UNAUTHORIZED",
+      message: "You must be logged in to access this response",
+    });
   }
+
+  // Ensure the user exists in PostgreSQL to satisfy foreign key constraints
+  const dbUser = await ctx.db.user.findUnique({
+    where: { id: user.userId },
+  });
+
+  if (!dbUser) {
+    try {
+      const client = await clerkClient();
+      const clerkUser = await client.users.getUser(user.userId);
+      const email = clerkUser.emailAddresses[0]?.emailAddress ?? "";
+
+      await ctx.db.user.upsert({
+        where: { id: user.userId },
+        update: {
+          emailAddress: email,
+          imageUrl: clerkUser.imageUrl,
+          firstName: clerkUser.firstName,
+          lastName: clerkUser.lastName,
+        },
+        create: {
+          id: user.userId,
+          emailAddress: email,
+          imageUrl: clerkUser.imageUrl,
+          firstName: clerkUser.firstName,
+          lastName: clerkUser.lastName,
+          credits: 150,
+        },
+      });
+    } catch (err) {
+      console.error("Auto-syncing Clerk user to database fallback:", err);
+      await ctx.db.user.upsert({
+        where: { id: user.userId },
+        update: {},
+        create: {
+          id: user.userId,
+          credits: 150,
+        },
+      });
+    }
+  }
+
   return next({
     ctx: {
       ...ctx,
-      user
-    }
-  })
-})
+      user,
+    },
+  });
+});
 
 const timingMiddleware = t.middleware(async ({ next, path }) => {
   const start = Date.now();

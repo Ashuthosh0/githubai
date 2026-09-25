@@ -21,8 +21,8 @@ export const projectRouter = createTRPCRouter({
           }
         }}
     })
-    await indexGithubRepo(project.id ,input.githubUrl,input.githubToken)
-    await pollCommits(project.id)
+    await indexGithubRepo(project.id, input.githubUrl, input.githubToken)
+    await pollCommits(project.id, input.githubToken)
     return project;
   }),
 
@@ -38,11 +38,20 @@ export const projectRouter = createTRPCRouter({
       }
   })
 }),
-getCommits : protectedProcedure.input(z.object({
-    projectId : z.string()
-  })).query(async ({ ctx , input}) =>{
-    return await ctx.db.commit.findMany({where : {projectId :input.projectId}})
-  }),
+  getCommits: protectedProcedure
+    .input(z.object({ projectId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      if (!input.projectId) return [];
+      return await ctx.db.commit.findMany({
+        where: { projectId: input.projectId },
+        orderBy: { commitDate: 'desc' },
+      });
+    }),
+  pullCommits: protectedProcedure
+    .input(z.object({ projectId: z.string(), githubToken: z.string().optional() }))
+    .mutation(async ({ ctx, input }) => {
+      return await pollCommits(input.projectId, input.githubToken);
+    }),
   saveAnswer : protectedProcedure.input(z.object({
     projectId : z.string(),
     question : z.string(),
